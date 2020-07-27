@@ -1,0 +1,8 @@
+channels:
+- conda-forge
+dependencies:
+- pyiron      # simulation framework
+- matplotlib 
+- pip
+- pip:
+    - pyprismatic 

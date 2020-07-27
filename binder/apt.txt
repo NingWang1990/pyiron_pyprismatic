@@ -1,0 +1,3 @@
+libgl1-mesa-glx
+libboost-all-dev
+libfftw3-dev 
