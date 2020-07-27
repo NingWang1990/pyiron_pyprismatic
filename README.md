@@ -1,2 +1,2 @@
 # pyiron_pyprismatic
-a wrapper run pyprismatic in pyiron
+a wrapper to run pyprismatic in pyiron
