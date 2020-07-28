@@ -3,7 +3,5 @@ channels:
 dependencies:
 - pyiron      # simulation framework
 - matplotlib
-- numpy  
-- pip
-- pip:
-    - pyprismatic 
+- numpy
+- pyprismatic  
