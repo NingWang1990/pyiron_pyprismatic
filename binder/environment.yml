@@ -4,4 +4,5 @@ dependencies:
 - pyiron      # simulation framework
 - matplotlib
 - numpy
-- pyprismatic  
+- pyprismatic
+- h5py  
