@@ -1,6 +1,6 @@
 from pyiron.base.job.template import TemplateJob
 import pyprismatic as pr
-from pyprismatic.fileio import readMRC
+import h5py
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -8,7 +8,7 @@ class PrismaticJob(TemplateJob):
     def __init__(self, project, job_name):
         super(PrismaticJob, self).__init__(project, job_name) 
         self.input['filenameAtoms'] = None
-        self.input['filenameOutput'] = 'output.mrc'
+        self.input['filenameOutput'] = 'output.h5'
         self.input['algorithm'] = 'multislice' 
         self._python_only_job = True
     def run_static(self):
@@ -16,14 +16,18 @@ class PrismaticJob(TemplateJob):
                  filenameOutput=self.input['filenameOutput'])
         meta.algorithm = self.input['algorithm']
         meta.go()
-        with self.project_hdf5.open("output/generic") as h5out: 
-            result = readMRC(self.input['filenameOutput'])
-            h5out["result"] = result 
+        #f = h5py.File(self.input['filenameOutput'], 'r')
+        #with self.project_hdf5.open("output/generic") as h5out: 
+        #    h5out["prismatic"] = 
+        #f.close()
         self.status.finished = True
 
     def plotting(self):
-        result = self["output/generic/result"]
-        plt.imshow(np.squeeze(np.sum(result, axis=2)))
+        #result = self["output/generic/"]
+        f = h5py.File(self.input['filenameOutput'], 'r')
+        data = f["4DSTEM_simulation/data/realslices/virtual_detector_depth0000/realslice"][()]
+        f.close()
+        plt.imshow(np.squeeze(np.sum(data, axis=2)))
 
     @property
     def filenameAtoms(self):
